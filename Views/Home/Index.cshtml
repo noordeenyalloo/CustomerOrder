@@ -1,0 +1,120 @@
+﻿@model IEnumerable<CustomerOrder.Models.CustomerOrderVm>
+
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">List</h5>
+
+                        <form id="Index">
+                            <div class="form-group row">
+                                <div class="form-group">
+                                    <label name="Name" class="control-label">Name</label>
+                                    <input name="Name" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label name="Location" class="control-label">Location</label>
+                                    <input name="Location" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-group">
+                                    <label name="OrderTypeLbl" class="control-label"> Order Type</label>
+                                    <input type="radio" name="OrderType" value="0" /> Normal
+                                    <input type="radio" name="OrderType" value="1" /> Special
+                                </div>
+                                <div class="form-group">
+                                    <label name="Number" class="control-label">Number</label>
+                                    <input name="Number" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label name="Descount" class="control-label">Descount</label>
+                                    <input name="Descount" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="button" onclick="submitStudent()" value="Send Order" class="btn btn-primary" />
+                            </div>
+                        </form>
+                        <div class="table-responsive">
+
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Order Date
+                                        </th>
+                                        <th>
+                                            Order Number
+                                        </th>
+                                        <th>
+                                            Customer Name
+                                        </th>
+
+                                        <th>
+                                            Location
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Date)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Number)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Location)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+</div>
+<script type="text/javascript">
+    function submitStudent() {
+        var data = $("#Index").serialize();
+        console.log(data);
+        alert(data);
+        $.ajax({
+            type: 'POST',
+            url: '/Home/Index',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: data,
+            success: function (result) {
+                alert('Successfully received Data ');
+                console.log(result);
+            },
+            error: function () {
+                alert('Failed to receive the Data');
+                console.log('Failed ');
+            }
+        })
+    }
+
+</script>
