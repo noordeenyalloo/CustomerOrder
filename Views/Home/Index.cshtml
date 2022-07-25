@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="button" onclick="submitStudent()" value="Send Order" class="btn btn-primary" />
+                                <input type="button" onclick="submitOrder()" value="Send Order" class="btn btn-primary" />
                             </div>
                         </form>
                         <div class="table-responsive">
@@ -97,7 +97,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    function submitStudent() {
+    function submitOrder() {
         var data = $("#Index").serialize();
         console.log(data);
         alert(data);
